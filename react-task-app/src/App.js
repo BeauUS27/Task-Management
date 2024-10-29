@@ -14,11 +14,24 @@ function App() {
     const result = tasks.filter(item=>item.id !== id)
     setTasks(result);
   }
+  function saveTask(e){
+    e.preventDefault();
+    if(!title){
+      alert("กรุณาป้อนข้อมูลด้วยค่ะ")
+    }else{
+      const newTask={
+        id:Math.floor(Math.random()*1000),
+        title:title
+      }
+      setTasks([...tasks,newTask])
+      setTitle("")
+    }
+  }
   return (
     <div className="App">
       <Header />
       <div className="container">
-        <AddForm title={title} setTitle={setTitle}/>
+        <AddForm title={title} setTitle={setTitle} saveTask={saveTask}/>
         <section>
           {tasks.map((data)=>(
             <Item key={data.id} data={data} deleteTask={deleteTask}/>
