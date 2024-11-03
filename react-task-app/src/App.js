@@ -2,15 +2,15 @@ import "./App.css";
 import Header from "./components/Header";
 import AddForm from "./components/AddForm";
 import Item from "./components/Item";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [tasks,setTasks] = useState([
-    {id:1, title:"study react"},
-    {id:2, title:"study full stack"}
-  ])
+  const [tasks,setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || [])
   const [title,setTitle] = useState("");
   const [editId,setEditId] = useState(null);
+  useEffect(()=>{
+    localStorage.setItem("tasks",JSON.stringify(tasks))
+  },[tasks])
   function deleteTask(id){
     const result = tasks.filter(item=>item.id !== id)
     setTasks(result);
