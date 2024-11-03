@@ -8,6 +8,7 @@ function App() {
   const [tasks,setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || [])
   const [title,setTitle] = useState("");
   const [editId,setEditId] = useState(null);
+  const [theme,setTheme] = useState("light");
   useEffect(()=>{
     localStorage.setItem("tasks",JSON.stringify(tasks))
   },[tasks])
@@ -45,7 +46,7 @@ function App() {
   }
   return (
     <div className="App">
-      <Header />
+      <Header theme={theme} setTheme={setTheme}/>
       <div className="container">
         <AddForm title={title} setTitle={setTitle} saveTask={saveTask} editId={editId}/>
         <section>
